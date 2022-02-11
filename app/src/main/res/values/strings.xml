@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FroyoApplication</string>
+    <string name="order_with_u">Заказ с собой</string>
+    <string name="main">Главная</string>
+    <string name="my_order">Мои заказы</string>
+    <string name="thank">Рахмет</string>
+    <string name="my_order_u">Мои заказы</string>
+    <string name="raqmet_u">Рахмет</string>
+    <string name="order_status">Статус заказа</string>
+    <string name="date_2">Дата</string>
+    <string name="order_number">Номер заказа</string>
+</resources>

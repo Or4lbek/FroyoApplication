@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    android:label="@string/order_with_u"
+    app:startDestination="@id/mainEstablishmentsFragment">
+
+    <fragment
+        android:id="@+id/mainEstablishmentsFragment"
+        android:name="com.sapar.froyoapplication.view.MainEstablishmentsFragment"
+        android:label="@string/order_with_u"
+        tools:layout="@layout/main_establishments_fragment" >
+        <action
+            android:id="@+id/action_mainEstablishmentsFragment_to_establishmentDetailFragment"
+            app:destination="@id/establishmentDetailFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/myOrdersFragment"
+        android:name="com.sapar.froyoapplication.view.MyOrdersFragment"
+        android:label="@string/my_order_u"
+        tools:layout="@layout/my_orders_fragment" >
+        <action
+            android:id="@+id/action_myOrdersFragment_to_myOrdersDetailFragment"
+            app:destination="@id/myOrdersDetailFragment"
+
+            app:enterAnim="@anim/slide_in_from_right"
+            app:popExitAnim="@anim/slide_out_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/raqmetFragment"
+        android:name="com.sapar.froyoapplication.view.RaqmetFragment"
+        android:label="@string/raqmet_u"
+        tools:layout="@layout/raqmet_fragment" />
+    <fragment
+        android:id="@+id/establishmentDetailFragment"
+        android:name="com.sapar.froyoapplication.view.EstablishmentDetailFragment"
+        android:label="{name}"
+        tools:layout="@layout/establishment_detail_fragment" >
+        <action
+            android:id="@+id/action_establishmentDetailFragment_to_mainEstablishmentsFragment"
+            app:destination="@id/mainEstablishmentsFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="establishment"
+            app:argType="com.sapar.froyoapplication.model.EstablishmentsItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/myOrdersDetailFragment"
+        android:name="com.sapar.froyoapplication.view.MyOrdersDetailFragment"
+        android:label="Детали заказа"
+        tools:layout="@layout/my_orders_detail_fragment">
+        <action
+            android:id="@+id/action_myOrdersDetailFragment_to_myOrdersFragment"
+            app:destination="@id/myOrdersFragment" />
+        <argument android:name="order_name"
+            app:argType="string" />
+        <argument
+            android:name="myOrder"
+            app:argType="com.sapar.froyoapplication.model.MyOrdersItem" />
+    </fragment>
+</navigation>
