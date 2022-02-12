@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sapar.froyoapplication.R
@@ -32,11 +33,17 @@ class MyOrdersAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
         holder.name.text = items[position].order_name
         holder.status.text = items[position].order_status
         holder.date.text = items[position].order_date
         holder.price.text = items[position].order_price
+
+//        holder.itemView.startAnimation(
+//            AnimationUtils.loadAnimation(
+//                mContext,
+//                R.anim.layout_animation
+//            )
+//        )
     }
 
     override fun getItemCount(): Int {
