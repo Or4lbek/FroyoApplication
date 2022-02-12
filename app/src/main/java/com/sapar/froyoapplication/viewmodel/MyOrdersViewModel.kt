@@ -9,6 +9,7 @@ import com.sapar.froyoapplication.model.network.RetroInstance
 import com.sapar.froyoapplication.model.network.RetroServiceInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MyOrdersViewModel : ViewModel() {
 
@@ -20,7 +21,9 @@ class MyOrdersViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val retroInstance = RetroInstance.getRetrofitInstance()
             val retroService = retroInstance.create(RetroServiceInterface::class.java)
-            val call = retroService.getMyOrders()
+            val call = withContext(Dispatchers.IO) {
+                retroService.getMyOrders()
+            }
             liveDataMyOrdersMutable.postValue(call)
         }
     }
