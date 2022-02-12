@@ -62,7 +62,7 @@ class EstablishmentsAdapter(
         var address: TextView = itemView.findViewById(R.id.textViewMyOrderAddress)
 
         override fun onClick(v: View) {
-            noteListener.onNoteClick(adapterPosition)
+            noteListener.onNoteClick(absoluteAdapterPosition)
         }
 
         init {

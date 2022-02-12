@@ -35,12 +35,9 @@
         tools:layout="@layout/raqmet_fragment" />
     <fragment
         android:id="@+id/establishmentDetailFragment"
-        android:name="com.sapar.froyoapplication.view.EstablishmentDetailFragment"
+        android:name="com.sapar.froyoapplication.ui.establishment_detail.EstablishmentDetailFragment"
         android:label="{name}"
         tools:layout="@layout/establishment_detail_fragment" >
-        <action
-            android:id="@+id/action_establishmentDetailFragment_to_mainEstablishmentsFragment"
-            app:destination="@id/mainEstablishmentsFragment" />
         <argument
             android:name="name"
             app:argType="string" />

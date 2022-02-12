@@ -53,7 +53,7 @@ class MainEstablishmentsFragment : Fragment(R.layout.main_establishments_fragmen
     private fun initViewModel() {
         val viewModel: MainEstablishmentsViewModel =
             ViewModelProvider(this)[MainEstablishmentsViewModel::class.java]
-        viewModel.liveDataEstablishments.observe(this, {
+        viewModel.liveDataEstablishments.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
                 if (establishmentsAdapter.items.isEmpty()) {
@@ -63,7 +63,7 @@ class MainEstablishmentsFragment : Fragment(R.layout.main_establishments_fragmen
                 Toast.makeText(requireContext(), "Error in getting list...", Toast.LENGTH_SHORT)
                     .show()
             }
-        })
+        }
         viewModel.loadEstablishmentsApi()
     }
 
