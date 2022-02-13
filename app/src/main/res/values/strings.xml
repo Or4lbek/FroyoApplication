@@ -9,4 +9,6 @@
     <string name="order_status">Статус заказа</string>
     <string name="date_2">Дата</string>
     <string name="order_number">Номер заказа</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>

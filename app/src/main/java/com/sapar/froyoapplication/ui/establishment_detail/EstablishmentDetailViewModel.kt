@@ -91,12 +91,88 @@ class EstablishmentDetailViewModel : ViewModel() {
                 meals3
             )
         )
+        val categoryFruits1 = CategoryMeal(
+            3,
+            category = "Фрукты1",
+            meals = listOf(
+                meals1,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3
+            )
+        )
+        val categoryFruits12 = CategoryMeal(
+            3,
+            category = "Фрукты12",
+            meals = listOf(
+                meals1,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3
+            )
+        )
+        val categoryFruits13 = CategoryMeal(
+            3,
+            category = "Фрукты13",
+            meals = listOf(
+                meals1,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3
+            )
+        )
+        val categoryFruits14 = CategoryMeal(
+            3,
+            category = "Фрукты14",
+            meals = listOf(
+                meals1,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3,
+                meals2,
+                meals3
+            )
+        )
+        val categoryFruits15 = CategoryMeal(
+            3,
+            category = "Фрукты15",
+            meals = listOf(
+                meals1
+            )
+        )
 
         liveData.postValue(
             listOf(
                 categoryPizza,
                 categoryFruits,
-                categoryDrinks
+                categoryDrinks,
+                categoryFruits1,categoryFruits12,categoryFruits13,categoryFruits14,categoryFruits15
             )
         )
     }

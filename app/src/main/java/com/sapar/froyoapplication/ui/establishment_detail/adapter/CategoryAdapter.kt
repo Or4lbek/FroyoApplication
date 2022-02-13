@@ -8,43 +8,40 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sapar.froyoapplication.databinding.ItemCateogryBinding
 import com.sapar.froyoapplication.model.menu.Category
 
-
-class CategoryAdapter :
+class CategoryAdapter(private val onClickCategory: (Int) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     var items: List<Category> = ArrayList()
-    @SuppressLint("NotifyDataSetChanged")
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     var selectedItemPos = -1
     var lastItemSelectedPos = -1
 
     inner class CategoryViewHolder(private val binding: ItemCateogryBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                onClickCategory(absoluteAdapterPosition)
+            }
+        }
+
         fun bind(category: Category) {
             binding.name.text = category.name
         }
-//        private fun changeSelectedPosition() {
-//            selectedItemPos = absoluteAdapterPosition
-//            when {
-//                lastItemSelectedPos != -1 && lastItemSelectedPos != selectedItemPos -> {
-//                    notifyItemChanged(lastItemSelectedPos, 2)
-//                }
-//            }
-//            notifyItemChanged(selectedItemPos, 0)
-//        }
 
         fun defaultCardStroke(ownBinding: ItemCateogryBinding = binding) {
             ownBinding.name.setTextColor(Color.BLUE)
-            ownBinding.root.strokeColor = Color.GREEN
+            ownBinding.root.setCardBackgroundColor(Color.WHITE)
         }
 
         fun selectedCardStroke() {
-            binding.name.setTextColor(Color.DKGRAY)
-            binding.root.strokeColor = Color.MAGENTA
+            binding.name.setTextColor(Color.WHITE)
+            binding.root.setCardBackgroundColor(Color.GRAY)
         }
     }
 
@@ -64,7 +61,11 @@ class CategoryAdapter :
         holder.bind(item)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(
+        holder: CategoryViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
         if (payloads.isNotEmpty()) {
             when (payloads[0]) {
                 2 -> {
@@ -77,5 +78,24 @@ class CategoryAdapter :
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun selectItem(pos: Int) {
+        if(selectedItemPos!=-1)
+            items[selectedItemPos].isCurrent = false
+        items[pos].isCurrent = true
+        selectedItemPos = pos
+        notifyDataSetChanged()
+//        changeSelectedPosition(pos)
+    }
+
+    private fun changeSelectedPosition(pos: Int) {
+        selectedItemPos = pos
+        when {
+            lastItemSelectedPos != -1 && lastItemSelectedPos != selectedItemPos -> {
+                notifyItemChanged(lastItemSelectedPos, 2)
+            }
+        }
+        notifyItemChanged(selectedItemPos, 0)
     }
 }
