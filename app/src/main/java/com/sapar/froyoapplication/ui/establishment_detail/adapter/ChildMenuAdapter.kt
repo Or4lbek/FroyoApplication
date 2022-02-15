@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.sapar.froyoapplication.R
+import com.sapar.froyoapplication.data.menu.Meal
 import com.sapar.froyoapplication.databinding.ItemMenuBinding
-import com.sapar.froyoapplication.model.menu.Meal
 import com.squareup.picasso.Picasso
 
 class ChildMenuAdapter(private val listener: ChildMenuAdapterListener) :
@@ -24,10 +24,12 @@ class ChildMenuAdapter(private val listener: ChildMenuAdapterListener) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.minusBtn.setOnClickListener {
-                binding.counts.setText(binding.counts.text.toString().toInt().minus(1).toString())
+                if (binding.counts.text.toString().toInt() > 0) {
+                    binding.counts.text = binding.counts.text.toString().toInt().minus(1).toString()
+                }
             }
             binding.plusBtn.setOnClickListener {
-                binding.counts.setText(binding.counts.text.toString().toInt().plus(1).toString())
+                binding.counts.text = binding.counts.text.toString().toInt().plus(1).toString()
             }
             binding.counts.addTextChangedListener {
                 items[absoluteAdapterPosition].counter = binding.counts.text.toString().toInt()
@@ -38,10 +40,8 @@ class ChildMenuAdapter(private val listener: ChildMenuAdapterListener) :
         }
 
         fun bind(item: Meal) {
-            binding.counts.setText(item.counter.toString())
+            binding.counts.text = item.counter.toString()
             binding.name.text = item.name
-//            binding.plusBtn.text = item.name
-//            binding.minusBtn.text = item.name
             binding.price.text = item.getPriceAsString()
             Picasso.get().load(item.imageUrl).placeholder(R.drawable.back)
                 .error(R.drawable.back).into(binding.imageViewMenuMealImage)
@@ -64,7 +64,6 @@ class ChildMenuAdapter(private val listener: ChildMenuAdapterListener) :
 
     interface ChildMenuAdapterListener {
         fun onChangeCount(meal: Meal)
-
     }
 
 }

@@ -4,17 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp"
     android:layout_marginHorizontal="8dp"
-    app:cardBackgroundColor="@color/blue"
+    android:padding="10dp"
+    app:cardCornerRadius="40dp"
     app:cardElevation="0dp">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:textSize="14sp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
         tools:text="Пицца" />
 
 </com.google.android.material.card.MaterialCardView>

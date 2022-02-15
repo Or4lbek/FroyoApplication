@@ -4,25 +4,26 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.sapar.froyoapplication.R
-import com.sapar.froyoapplication.databinding.EstablishmentDetailFragmentBinding
-import com.sapar.froyoapplication.model.menu.Category
-import com.sapar.froyoapplication.model.menu.Meal
+import com.sapar.froyoapplication.data.menu.Category
+import com.sapar.froyoapplication.data.menu.Meal
+import com.sapar.froyoapplication.databinding.FragmentEstablishmentDetailBinding
 import com.sapar.froyoapplication.ui.establishment_detail.adapter.CategoryAdapter
 import com.sapar.froyoapplication.ui.establishment_detail.adapter.ChildMenuAdapter
 import com.sapar.froyoapplication.ui.establishment_detail.adapter.ParentMenuAdapter
 
 
-class EstablishmentDetailFragment : Fragment(R.layout.establishment_detail_fragment),
+class EstablishmentDetailFragment : Fragment(R.layout.fragment_establishment_detail),
     ChildMenuAdapter.ChildMenuAdapterListener {
 
     private lateinit var menuLayoutManager: LinearLayoutManager
-    private var _binding: EstablishmentDetailFragmentBinding? = null
+    private var _binding: FragmentEstablishmentDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: EstablishmentDetailViewModel
     private val parentMenuAdapter: ParentMenuAdapter = ParentMenuAdapter(this)
@@ -30,10 +31,11 @@ class EstablishmentDetailFragment : Fragment(R.layout.establishment_detail_fragm
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = EstablishmentDetailFragmentBinding.bind(view)
+        _binding = FragmentEstablishmentDetailBinding.bind(view)
         viewModel = ViewModelProvider(this)[EstablishmentDetailViewModel::class.java]
         binding.initUI()
         setObserver()
+
     }
 
     private fun setObserver() {
@@ -48,7 +50,7 @@ class EstablishmentDetailFragment : Fragment(R.layout.establishment_detail_fragm
     }
 
     //SOLID
-    private fun EstablishmentDetailFragmentBinding.initUI() {
+    private fun FragmentEstablishmentDetailBinding.initUI() {
         categoryAdapter = CategoryAdapter {
             onClickCategory(it)
         }
@@ -95,7 +97,6 @@ class EstablishmentDetailFragment : Fragment(R.layout.establishment_detail_fragm
             override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
                 return 500 / this@smoothSnapToPosition.computeVerticalScrollRange().toFloat()
             }
-
         }
         smoothScroller.targetPosition = position
         layoutManager?.startSmoothScroll(smoothScroller)
@@ -107,6 +108,11 @@ class EstablishmentDetailFragment : Fragment(R.layout.establishment_detail_fragm
     }
 
     override fun onChangeCount(meal: Meal) {
-        Toast.makeText(requireContext(), "${meal.counter}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "${meal.price * meal.counter}", Toast.LENGTH_SHORT).show()
+        viewModel.totalPrice += meal.price * meal.counter
+        binding.btnBasket.apply {
+            isVisible = viewModel.totalPrice > 0
+            text = viewModel.totalPrice.toString()
+        }
     }
 }

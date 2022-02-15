@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sapar.froyoapplication.common.MarginItemDecoration
+import com.sapar.froyoapplication.data.menu.CategoryMeal
 import com.sapar.froyoapplication.databinding.ItemParentMenuBinding
-import com.sapar.froyoapplication.model.menu.CategoryMeal
 
 class ParentMenuAdapter(private val listener: ChildMenuAdapter.ChildMenuAdapterListener) :
     RecyclerView.Adapter<ParentMenuAdapter.CategoryContainerViewHolder>() {
@@ -30,8 +30,10 @@ class ParentMenuAdapter(private val listener: ChildMenuAdapter.ChildMenuAdapterL
                 )
             )
         }
+
         fun bind(item: CategoryMeal) {
             binding.category.text = item.category
+            binding.mealRv.isNestedScrollingEnabled = false
             binding.mealRv.adapter = ChildMenuAdapter(listener).apply {
                 items = item.meals
             }

@@ -8,9 +8,9 @@
 
     <fragment
         android:id="@+id/mainEstablishmentsFragment"
-        android:name="com.sapar.froyoapplication.view.MainEstablishmentsFragment"
+        android:name="com.sapar.froyoapplication.ui.establishment_main.MainEstablishmentsFragment"
         android:label="@string/order_with_u"
-        tools:layout="@layout/main_establishments_fragment" >
+        tools:layout="@layout/fragment_main_establishments" >
         <action
             android:id="@+id/action_mainEstablishmentsFragment_to_establishmentDetailFragment"
             app:destination="@id/establishmentDetailFragment"
@@ -18,9 +18,9 @@
     </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
-        android:name="com.sapar.froyoapplication.view.MyOrdersFragment"
+        android:name="com.sapar.froyoapplication.ui.my_orders.MyOrdersFragment"
         android:label="@string/my_order_u"
-        tools:layout="@layout/my_orders_fragment" >
+        tools:layout="@layout/fragment_my_orders" >
         <action
             android:id="@+id/action_myOrdersFragment_to_myOrdersDetailFragment"
             app:destination="@id/myOrdersDetailFragment"
@@ -30,26 +30,27 @@
     </fragment>
     <fragment
         android:id="@+id/raqmetFragment"
-        android:name="com.sapar.froyoapplication.view.RaqmetFragment"
+        android:name="com.sapar.froyoapplication.ui.rakhmet.RaqmetFragment"
         android:label="@string/raqmet_u"
-        tools:layout="@layout/raqmet_fragment" />
+        tools:layout="@layout/fragment_raqmet" />
     <fragment
         android:id="@+id/establishmentDetailFragment"
         android:name="com.sapar.froyoapplication.ui.establishment_detail.EstablishmentDetailFragment"
         android:label="{name}"
-        tools:layout="@layout/establishment_detail_fragment" >
+        tools:layout="@layout/fragment_establishment_detail" >
         <argument
             android:name="name"
             app:argType="string" />
         <argument
             android:name="establishment"
-            app:argType="com.sapar.froyoapplication.model.EstablishmentsItem" />
+            app:argType="com.sapar.froyoapplication.data.establishment.EstablishmentsItem" />
+
     </fragment>
     <fragment
         android:id="@+id/myOrdersDetailFragment"
-        android:name="com.sapar.froyoapplication.view.MyOrdersDetailFragment"
+        android:name="com.sapar.froyoapplication.ui.my_orders_detail.MyOrdersDetailFragment"
         android:label="Детали заказа"
-        tools:layout="@layout/my_orders_detail_fragment">
+        tools:layout="@layout/fragment_my_orders_detail">
         <action
             android:id="@+id/action_myOrdersDetailFragment_to_myOrdersFragment"
             app:destination="@id/myOrdersFragment" />
@@ -57,6 +58,6 @@
             app:argType="string" />
         <argument
             android:name="myOrder"
-            app:argType="com.sapar.froyoapplication.model.MyOrdersItem" />
+            app:argType="com.sapar.froyoapplication.data.my_orders.MyOrdersItem" />
     </fragment>
 </navigation>

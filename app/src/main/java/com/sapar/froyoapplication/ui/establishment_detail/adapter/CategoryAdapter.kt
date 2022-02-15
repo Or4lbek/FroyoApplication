@@ -1,15 +1,14 @@
 package com.sapar.froyoapplication.ui.establishment_detail.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sapar.froyoapplication.data.menu.Category
 import com.sapar.froyoapplication.databinding.ItemCateogryBinding
-import com.sapar.froyoapplication.model.menu.Category
 
 class CategoryAdapter(private val onClickCategory: (Int) -> Unit) :
-    RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+    RecyclerView.Adapter<CategoryViewHolder>() {
 
     var items: List<Category> = ArrayList()
         @SuppressLint("NotifyDataSetChanged")
@@ -18,32 +17,9 @@ class CategoryAdapter(private val onClickCategory: (Int) -> Unit) :
             notifyDataSetChanged()
         }
 
-    var selectedItemPos = -1
-    var lastItemSelectedPos = -1
+    private var selectedItemPos = -1
+    private var lastItemSelectedPos = -1
 
-    inner class CategoryViewHolder(private val binding: ItemCateogryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        init {
-            itemView.setOnClickListener {
-                onClickCategory(absoluteAdapterPosition)
-            }
-        }
-
-        fun bind(category: Category) {
-            binding.name.text = category.name
-        }
-
-        fun defaultCardStroke(ownBinding: ItemCateogryBinding = binding) {
-            ownBinding.name.setTextColor(Color.BLUE)
-            ownBinding.root.setCardBackgroundColor(Color.WHITE)
-        }
-
-        fun selectedCardStroke() {
-            binding.name.setTextColor(Color.WHITE)
-            binding.root.setCardBackgroundColor(Color.GRAY)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val binding =
@@ -51,8 +27,14 @@ class CategoryAdapter(private val onClickCategory: (Int) -> Unit) :
         return CategoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CategoryViewHolder,
+        @SuppressLint("RecyclerView") position: Int
+    ) {
+
         val item = items[position]
+        holder.itemView.setOnClickListener { onClickCategory(position) }
+
         if (item.isCurrent) {
             holder.selectedCardStroke()
             lastItemSelectedPos = position
@@ -80,22 +62,12 @@ class CategoryAdapter(private val onClickCategory: (Int) -> Unit) :
         return items.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun selectItem(pos: Int) {
-        if(selectedItemPos!=-1)
+        if (selectedItemPos != -1)
             items[selectedItemPos].isCurrent = false
         items[pos].isCurrent = true
         selectedItemPos = pos
         notifyDataSetChanged()
-//        changeSelectedPosition(pos)
-    }
-
-    private fun changeSelectedPosition(pos: Int) {
-        selectedItemPos = pos
-        when {
-            lastItemSelectedPos != -1 && lastItemSelectedPos != selectedItemPos -> {
-                notifyItemChanged(lastItemSelectedPos, 2)
-            }
-        }
-        notifyItemChanged(selectedItemPos, 0)
     }
 }

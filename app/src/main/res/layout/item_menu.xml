@@ -71,22 +71,18 @@
                         android:textColor="#2997FF"
                         android:textSize="20sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/counts"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="1dp"
                         android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:digits="0123456789"
+
                         android:text="0"
                         android:gravity="center"
-                        android:hint="0"
-                        android:inputType="numberDecimal"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        tools:ignore="Autofill" />
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/plus_btn"
@@ -123,7 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="56dp" />
+            app:layout_constraintGuide_percent="0.55445546" />
 
 
         <TextView
@@ -158,12 +154,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--    <View-->
-<!--        android:id="@+id/div"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:background="#ECECEC"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
